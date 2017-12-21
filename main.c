@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdarg.h>
 
-#define MAXNUMBER 65
+#define MAXNUMBER 82
 
 static void error(char *,...);
 static void scanargs(int,char **);
@@ -17,7 +17,7 @@ int main(int argc,char  *argv[])
 	long n;
 
 	prog = *argv;
-	number[64] = '\0';
+	number[MAXNUMBER-1] = '\0';
 	nibble = 0;
 
 	if (argc == 1)
@@ -26,7 +26,7 @@ int main(int argc,char  *argv[])
 	scanargs(argc,argv);
 
 	while (--argc > 0) {
-		if(!(n = atoi(*++argv)))
+		if(!(n = atol(*++argv)))
 			continue;
 		for(i = MAXNUMBER-2,j=0; i >= 0 && n ;n/=2,--i,j += nibble ? 1 : 0 ){
 			if (j == 4 && nibble)	{
@@ -70,3 +70,5 @@ static void error(char *fmt,...)
 
 	exit(1);
 }
+
+//18446744073709551616
